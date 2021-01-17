@@ -1,0 +1,17 @@
+---
+title: "AIRFLOW-DATA PIPELINE"
+author: "LEANDER"
+date: "17/01/2021"
+output: html_document
+---
+
+
+<p><h4><b>The data has been gathered from FINNHUB.IO,an online financial instrument API
+that provides data on various american listed companies.</b></h4></p>
+
+<p><h4><b>I have gathered data relating to the public sentimen based on news media for leading companies in the tech sector including GOOGLE,MICROSOFT,ALIBABA,FACEBOOK etc.</b></h4></p>
+
+>The below python script connects to the FINNHUB API and returns  the stock data in JSON format,this is the first stage of the data workflow pipeline. which we then transform into a dataframe using python.
+
+
+
