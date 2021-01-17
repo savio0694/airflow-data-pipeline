@@ -5,13 +5,25 @@ date: "17/01/2021"
 output: html_document
 ---
 
+<div>
+<img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/airflow.png?raw=true>
+</div>
 
-<p><h4><b>The data has been gathered from FINNHUB.IO,an online financial instrument API
-that provides data on various american listed companies.</b></h4></p>
 
-<p><h4><b>I have gathered data relating to the public sentimen based on news media for leading companies in the tech sector including GOOGLE,MICROSOFT,ALIBABA,FACEBOOK etc.</b></h4></p>
+<p><h4>Apache Airflow is an open-source workflow management platform. It started at Airbnb in October  as a solution to manage the company's increasingly complex workflows. Creating Airflow allowed Airbnb to programmatically author and schedule their workflows and monitor them via the built-in Airflow user interface.</h4></p>
 
->The below python script connects to the FINNHUB API and returns  the stock data in JSON format,this is the first stage of the data workflow pipeline. which we then transform into a dataframe using python.
+<p><h4>Airflow uses directed acyclic graphs (DAGs) to manage workflow orchestration. Tasks and dependencies are defined in Python and then Airflow manages the scheduling and execution. DAGs can be run either on a defined schedule (e.g. hourly or daily) or based on external event triggers .</h4></p>
+
+<br>
+<br>
+
+<h2><b> STAGE-1 :DATA GATHERING</b></h2>
+<p><h4>The data has been gathered from FINNHUB.IO,an online financial instrument API
+that provides data on various american listed companies.</h4></p>
+
+>I have gathered data relating to the public sentiment based on news media for leading companies in the tech sector including GOOGLE,MICROSOFT,ALIBABA,FACEBOOK etc.
+
+
 
 
 
