@@ -23,6 +23,17 @@ that provides data on various american listed companies.</h4></p>
 
 >I have gathered data relating to the public sentiment based on news media for leading companies in the tech sector including GOOGLE,MICROSOFT,ALIBABA,FACEBOOK etc.
 
+<br>
+<br>
+
+<h2><b> STAGE-2 :DATA TRANSFORMATION</b></h2>
+<p><h4>We use the python data analysis library pandas to transform the JSON files into a table structured dataframe,arrange companies by bullish(upward trending)  sentiment and save it in csv format.</h4></p>
+
+>The final dataframe looks like so:
+
+<div>
+<img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/frame.PNG?raw=true>
+</div>
 
 
 
