@@ -7,7 +7,7 @@ The pipeline steps are as follows:
 
 GATHER DATA-->TRANSFORM-->MONITOR
 
-he code for the pipeline is in he MYDAG.PY file.
+The code for the pipeline is in he MYDAG.PY file.
 
 The demonstration of the pipeline can be found at this link:
 
