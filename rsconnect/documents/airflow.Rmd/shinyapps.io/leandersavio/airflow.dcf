@@ -5,8 +5,8 @@ account: leandersavio
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3481043
-bundleId: 4106823
+bundleId: 4106891
 url: https://leandersavio.shinyapps.io/airflow/
-when: 1610862996.43422
+when: 1610864835.14331
 asMultiple: FALSE
 asStatic: FALSE
