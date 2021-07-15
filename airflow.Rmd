@@ -40,7 +40,7 @@ that provides data on various american listed companies.</h4></p>
 <br>
 
 <h2><b> STAGE-2 :DATA TRANSFORMATION</b></h2>
-<p><h4>We use the python data analysis library pandas to transform the JSON files into a table structured dataframe,arrange companies by bullish(upward trending)  sentiment and save it in csv format.</h4></p>
+<p><h4> The python data analysis library pandas  transforms the JSON files into a table structured dataframe,arrange companies by bullish(upward trending)  sentiment and save it in csv format.</h4></p>
 
 >The final dataframe looks like so:
 
@@ -49,6 +49,11 @@ that provides data on various american listed companies.</h4></p>
 </div>
 
 <br>
+
+>Save a copy on my dektop along with the date using UNIX commands
+
+<br>
+<img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/dag5.PNG?raw=true>
 <br>
 <h2><b> STAGE-3 :PIPELINE MONITORING</b></h2>
 <p><h4>Send an email once stage 2 has been completed.We can also monitor the individual stages of the pipeline through airflows inbuilt user interface.</h4></p>
