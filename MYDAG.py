@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
-
+from airflow.contrib.operators.gcs_operator import GoogleCloudStorageCreateBucketOperator
 from airflow.operators.email import EmailOperator
 import papermill as pm
 
@@ -18,18 +18,24 @@ default_args = {
     'retry_delay': timedelta(seconds=10),
 }
 
-dag = DAG('MYDAG', default_args=default_args,schedule_interval='0 11 * * *')
+
+
+dag = DAG('MYDAG', 
+
+default_args=default_args,
+schedule_interval='0 11 * * *'
+)
 
 
  
 
 def DataFetch_Transform_Clean():
-    pm.execute_notebook(
-    '/mnt/c/users/leand/AirflowHome/dags/stock.ipynb',
-    '/mnt/c/users/leand/AirflowHome/dags/stock_out.ipynb',
+     pm.execute_notebook(
+    '/c/users/leand/AirflowHome/dags/stock.ipynb',
+    '/c/users/leand/AirflowHome/dags/stock_out.ipynb',
     parameters=dict(alpha=0.6, ratio=0.1)
      
-)
+    )
 
 DataFetch_Transform_Clean = PythonOperator(
         task_id="run_notebook",
@@ -37,8 +43,14 @@ DataFetch_Transform_Clean = PythonOperator(
         dag=dag
     )
 
+move_file = BashOperator(
+        task_id='move-file',
+        bash_command='tail -7 /c/users/leand/AirflowHome/dags/stocks.csv>> /c/users/leand/AirflowHome/dags/stocks.csv',
+        dag=dag
 
-    
+    )
+
+
 
 send_email = EmailOperator(
         task_id='send_email',
@@ -50,7 +62,7 @@ send_email = EmailOperator(
 
   
     
-DataFetch_Transform_Clean >> send_email
+DataFetch_Transform_Clean >> move_file >> send_email
 
 
 

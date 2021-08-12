@@ -13,7 +13,7 @@ runtime: shiny
 <img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/airflow.png?raw=true>
 </div>
 
-
+<br>
 <p><h4>Apache Airflow is an open-source data workflow management platform. It started at Airbnb in October  2015 as a solution to manage the company's increasingly complex workflows. Creating Airflow allowed Airbnb to programmatically author and schedule their  data workflows and monitor them via the built-in Airflow user interface.</h4></p>
 
 <p><h4>Airflow uses directed acyclic graphs (DAGs) to manage workflow orchestration. Tasks and dependencies are defined in Python and then Airflow manages the scheduling and execution. DAGs can be run either on a defined schedule (e.g. hourly or daily) or based on external event triggers .</h4></p>
@@ -39,10 +39,11 @@ that provides data on various american listed companies.</h4></p>
 <br>
 <br>
 
-<h2><b> STAGE-2 :DATA TRANSFORMATION</b></h2>
+<h2><b> STAGE-2 :DATA TRANSFORMATION and CAPTURE</b></h2>
 <p><h4> The python data analysis library pandas  transforms the JSON files into a table structured dataframe,arrange companies by bullish(upward trending)  sentiment and save it in csv format.</h4></p>
 
->The final dataframe looks like so:
+> The data transform is done using a jupyter notebook whose executio  will be orchestrated by AIRFLOW.
+The final dataframe looks like so:
 
 <div>
 <img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/frame.PNG?raw=true>
@@ -50,13 +51,13 @@ that provides data on various american listed companies.</h4></p>
 
 <br>
 
->Save a copy on my dektop along with the date using UNIX commands
+>Save a copy on my dektop along with the date using the airflow bash operator which allows for UNIX commands or a script file
 
 <br>
 <img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/dag5.PNG?raw=true>
 <br>
 <h2><b> STAGE-3 :PIPELINE MONITORING</b></h2>
-<p><h4>Send an email once stage 2 has been completed.We can also monitor the individual stages of the pipeline through airflows inbuilt user interface.</h4></p>
+<p><h4>Send an email using the airflow email operator once stage 2 has  completed.We can also monitor the individual stages of the pipeline through airflows inbuilt user interface.</h4></p>
 
 <br>
 <img src=https://github.com/savio0694/airflow-pipeline/blob/main/images/email.PNG?raw=true>
@@ -81,6 +82,10 @@ import json
 import pandas as pd
 from pandas.io.json import json_normalize
 import requests
+from datetime import datetime
+from google.cloud import storage
+
+
 data_json=[]
 
 symbols=['NFLX','MSFT','GOOGL','FB','AMZN','BABA','TSLA']
@@ -93,9 +98,29 @@ for val in symbols:
 df_cols=df.iloc[:,[1,3,5,6,2,7]]
 df_cols.columns=['NewsScore','Symbol','Buzz','WeekAvgBuzz','BearSentiment','BullSentiment']
 df_cols=df_cols[['Symbol','NewsScore','Buzz','WeekAvgBuzz','BearSentiment','BullSentiment']]
+df_cols['Date']=datetime.now().strftime("%Y-%m-%d")
 df_final=df_cols.sort_values(by=['BullSentiment'],ascending=False).reset_index()
 
 df_final.to_csv("/mnt/c/Users/leand/AirflowHome/dags/stocks.csv")
+
+
+
+ef upload_blob(bucket_name, source_file_name, destination_blob_name):
+   
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print(
+        "File {} uploaded to {}.".format(
+            source_file_name, destination_blob_name
+        )
+    )
+
+
+upload_blob('stock_data_bucket1', '/c/users/leand/AirflowHome/dags/stocks.csv', 'stock_data.csv')
 ```
 
 <br>
